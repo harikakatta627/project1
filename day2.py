@@ -105,7 +105,7 @@ def view_table(table_name):
         if not table_name.replace('_', '').isalnum():
              return "Invalid table name specified.", 400
 
-        query = text(f"SELECT TOP 5 * FROM {table_name}")
+        query = text(f"SELECT TOP 20 * FROM {table_name}")
         
         with db.engine.connect() as connection:
             result = connection.execute(query)
@@ -115,7 +115,7 @@ def view_table(table_name):
         if not rows:
             return f"Table '{escape(table_name)}' exists but is empty or no data was found."
 
-        output_string = f"<h3>Showing Top 5 Rows from <i>{escape(table_name)}</i></h3>"
+        output_string = f"<h3>Showing Top 20 Rows from <i>{escape(table_name)}</i></h3>"
         output_string += ", ".join(columns) + "<br><br>"
 
         for row in rows:
